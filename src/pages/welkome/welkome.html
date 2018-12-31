@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Account database
+    </ion-title>
+    <ion-buttons end>
+       <button ion-button (click)='homepage()'>
+        <ion-icon name='log-out'></ion-icon>
+      </button> 
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="top">
+    <h3>Welcome to home page</h3>
+
+  </div>
+  
+  <ion-list>
+    <ion-item class="center" *ngFor='let persoon of employees' (click)='showDetails(emp)' (swipe)="swipe($event)">
+      <img height="100" width="100" src="http://127.0.0.1:5984/employees/{{persoon.doc.firstName}} {{persoon.doc.lastName}}/profile.jpg">
+
+      <div>
+        <h3>{{persoon.doc.firstName}} {{persoon.doc.lastName}}</h3>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

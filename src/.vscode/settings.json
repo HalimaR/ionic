@@ -1,0 +1,6 @@
+{
+    "files.watcherExclude": {
+        "{     \"typescript.tsdk\": \"node_modules\\\\typescript\\\\lib\"  }": true
+    },
+    "javascript.implicitProjectConfig.experimentalDecorators": true
+}
