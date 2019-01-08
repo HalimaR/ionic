@@ -57,13 +57,12 @@ export class EmployeeProvider {
        .subscribe(data => {
           this.http.put(url + '?rev=' + data['_rev'], JSON.stringify(employee), this.getOptions())
             .subscribe(data => {
-              console.log("nu zit je in update");
               console.log(data);
             }, err => {
               console.log(err);
             });
        }, err => {
-           console.log(err + 'update');
+           console.log(err);
        });
   }
 

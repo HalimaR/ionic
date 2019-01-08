@@ -25,9 +25,14 @@ export class HomePage {
       .then(data => {
         this.employees = data.rows;
       });
-    //this.refresh();
   }
-  
+  showDetails(employee) {
+    let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
+    modal.onDidDismiss(data => {
+      this.reReadEmployees();
+    });
+    modal.present();
+  }
   addEmployee() {
     let modal = this.modalCtrl.create('EmployeePage', { employee: null });
     modal.onDidDismiss(data => {
@@ -44,8 +49,4 @@ export class HomePage {
   login() {
     this.navCtrl.push(LoginPage)
   }
-  signup() {
-    this.navCtrl.push(SignupPage)
-  }
-  
 }

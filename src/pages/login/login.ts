@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Loading, ModalController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController} from 'ionic-angular';
 import { EmployeeProvider } from './../../providers/employee/employee';
-import { WelkomePage } from '../welkome/welkome';
+import { AccountdbPage } from '../accountdb/accountdb';
 import { HomePage } from '../home/home';
-import { unescapeHtml } from '@angular/platform-browser/src/browser/transfer_state';
+import { MenuPage } from '../menu/menu';
+
 
 @IonicPage()
 @Component({
@@ -17,9 +18,8 @@ export class LoginPage {
   
   private employees: any;
   private canUpdate = false;
-  private voornaam : string;
-  private achternaam: string;
-
+  private voornaamLijst: Array<string> = [];
+  private passwordLijst: Array<string> = [];
 
   constructor(
     private empProv: EmployeeProvider,
@@ -29,55 +29,59 @@ export class LoginPage {
     public alertCtrl: AlertController
     ) {
   }
-  ionViewDidEnter() {/*
-    var employee = this.navParams.get('employee');
-    if (employees) {
-      this.employee = employee.doc;
-      this.canUpdate = true;
-    } */
-    console.log("de lees methode wordt uitgevoerd");
+  ionViewDidEnter() {
     console.log(this.reReadEmployees());
-      /*
-      for(let i=0; i< this.employees.data.rows.count();i++){
-        console.log(this.employees.data.rows[i].doc.firstName);
-      }*/
   }
   homepage(){
     this.navCtrl.push(HomePage);
   }
-  
+
   reReadEmployees() {
-    console.log("admin?");
+  
     this.empProv.read()
       .then(data => {
-        this.employees = data.rows[0].doc.firstName;
-        this.voornaam = data.rows[0].doc.firstName;
-        console.log("employee:" + this.voornaam);
+        for (let i = 0; i < data.rows.length; i++) {
+          //console.log(data.rows[i].doc.firstName);
+          this.voornaamLijst.push(data.rows[i].doc._id);
+          this.passwordLijst.push(data.rows[i].doc.password);
+          //this.user_idLijst.push(data.rows[i].doc._id);
+        }
       });
-      for (let i = 0; i < this.employees.rows.doc.length; i++) {
-        console.log(this.employees.rows.doc[i]);
-      }
   }
+ 
   singnIn() {
-    
-    console.log("ik kom in de singnIn methode terecht");
-    //this.navCtrl.push(WelkomePage)
+    let bestaat: boolean = false;
+    for (let i = 0; i < this.voornaamLijst.length; i++) {
+      if (this.uname.value == this.voornaamLijst[i]) {
+        for (let j = 0; j < this.passwordLijst.length; j++) {
+          if (this.password.value == this.passwordLijst[i]) {
+            bestaat = true;
+
+          }
+        }
+      }
+    }
+
     var employee = this.navParams.get('employee');
-    // er moet nagekeken worden of de gebruiker al bestaat
-    if (this.uname.value == "admin" && this.password.value == "admin"){
+    if (bestaat){
       let alert = this.alertCtrl.create({
         title: 'Login Successful',
         subTitle: 'You are logged in',
         buttons: ['OK']
       });
        alert.present();
-    
-      this.navCtrl.push(WelkomePage)
+      this.navCtrl.push(AccountdbPage, { data: this.uname.value });
+      this.navCtrl.push(MenuPage, { data: this.uname.value });
       console.log('Login Successful')
-      console.log('naam: ',this.uname.value,', password: ',this.password.value);
       
     }
     else {
+      let alert = this.alertCtrl.create({
+        title: 'wrong login',
+        subTitle: 'oops you have given a wrong password or username, try again',
+        buttons: ['OK']
+      });
+      alert.present();
       console.log('naam: ',this.uname.value,', password: ',this.password.value);
     }
   }

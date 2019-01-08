@@ -1,16 +1,17 @@
 <ion-header>
-  <ion-navbar>    
+    <ion-navbar hideBackButton >
     <ion-title>LOG IN</ion-title>
   <ion-buttons >
     <button ion-button (click)='homepage()'>
       <ion-icon name='home'></ion-icon>
     </button>
+    
   </ion-buttons>
-  </ion-navbar>
+ </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>geef admin admin in </h1>
+  <h4>username bv: admin admin</h4>
   <ion-list>
     <ion-item>
       <ion-label color=primary floating>username</ion-label>
@@ -21,7 +22,9 @@
       <ion-label color=primary floating>password</ion-label>
       <ion-input class="inPassword" type="password" #password ></ion-input>
     </ion-item>
-
+    <!-- <ion-item>
+      <button ion-button class="singnIn" (click)="azerty()">LOG IN2</button>
+    </ion-item> -->
     <ion-item>
       <button ion-button class="singnIn" (click)="singnIn()">LOG IN</button>
     </ion-item>

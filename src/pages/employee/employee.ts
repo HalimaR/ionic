@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { EmployeeProvider } from './../../providers/employee/employee';
 import { ImageProvider } from './../../providers/image/image';
 import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
-import couchdb from 'couchdb';
+
+
 
 @IonicPage()
 @Component({
@@ -13,14 +15,11 @@ import couchdb from 'couchdb';
 })
 export class EmployeePage {
 
-  @ViewChild('username') uname;
-  @ViewChild('password') password;
 
   private employee: any = {};
   private canDelete = false;
   private canUpdate = false;
   private canAdd = true;
-  private db;
 
   constructor(
     public navCtrl: NavController,
@@ -28,19 +27,17 @@ export class EmployeePage {
     private empProv: EmployeeProvider,
     public viewCtrl: ViewController,
     public imgProv: ImageProvider,
-    public alertCtrl: AlertController
+    private camera: Camera
   ) {}
 
   ionViewDidEnter() {
     var employee = this.navParams.get('employee');
     if (employee) {
       this.employee = employee.doc;
-      this.db = new couchdb('employees');
       this.canDelete = true;
       this.canUpdate = true;
       this.canAdd = false;
     }
-    
   }
   homepage() {
     this.navCtrl.push(HomePage);
@@ -49,15 +46,12 @@ export class EmployeePage {
     if (this.employee.firstName != undefined && this.employee.lastName != undefined) {
       if (this.canUpdate) {
         this.empProv.update(this.employee);
-        console.log('naam: ', this.uname.value );
       }
     else {
-          // wordt verwijst naar de creatEm provider/employee
           this.empProv.createEm(this.employee);
         }
     }
     this.viewCtrl.dismiss(this.employee);
-   
   }
 
   delete() {

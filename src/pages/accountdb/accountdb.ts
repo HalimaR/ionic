@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, ModalController, AlertController, NavParams } from 'ionic-angular';
 import { EmployeeProvider } from '../../providers/employee/employee';
 import { LoginPage} from '../login/login';
 import { HomePage } from '../home/home';
+import { MenuPage } from '../menu/menu';
+
 
 @IonicPage()
 @Component({
@@ -11,20 +13,26 @@ import { HomePage } from '../home/home';
 })
 export class  AccountdbPage {
   private employees;
+  public id: string;
   private likeLijst: Array<string> = [];
 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
-    public empProv: EmployeeProvider
-  ) { }
+    public empProv: EmployeeProvider,
+    public navParams: NavParams
+  ) 
+  { 
+    this.id = this.navParams.get('data');
+  }
 
   ionViewDidEnter() {
     this.empProv.read()
       .then(data => {
         this.employees = data.rows;
       });
+      
   }
     
   showDetails(employee) {
@@ -47,7 +55,6 @@ export class  AccountdbPage {
     this.empProv.read()
       .then(data => {
         //this.employees = data.rows;
-        console.log("nu zit je in reRead van welkom");
         console.log(this.employees = data.rows);
       });
   }
@@ -60,11 +67,19 @@ export class  AccountdbPage {
       console.log("swiped to right");
     }
   }
-
+ like(employee){
+   this.likeLijst.push(employee.id);
+   console.log(this.likeLijst);
+ }
+ hide(){
+   console.log("put");
+ }
   login(){
     this.navCtrl.push(LoginPage)
   }
-
+  menupage() {
+    this.navCtrl.push(MenuPage);
+  }
   homepage() {
     this.navCtrl.push(HomePage);
     let alert = this.alertCtrl.create({

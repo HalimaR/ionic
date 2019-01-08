@@ -6,10 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { EmployeeProvider } from '../providers/employee/employee';
-
-import { WelkomePage } from '../pages/welkome/welkome';
+import { AccountdbPage } from '../pages/accountdb/accountdb';
 import { LoginPage } from '../pages/login/login';
-import { SignupPage } from '../pages/signup/signup';
+import { MenuPage } from '../pages/menu/menu';
 
 import { Camera } from '@ionic-native/camera';
 import { ImageProvider } from '../providers/image/image';
@@ -27,20 +26,20 @@ export class CameraMock extends Camera {
 @NgModule({
   declarations: [
     MyApp,
-    WelkomePage,
+    AccountdbPage,
     LoginPage,
-    SignupPage
+    MenuPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    WelkomePage,
+    AccountdbPage,
     LoginPage,
-    SignupPage
+    MenuPage
   ],
   providers: [
     StatusBar,
