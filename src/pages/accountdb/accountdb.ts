@@ -78,7 +78,7 @@ export class  AccountdbPage {
     this.navCtrl.push(LoginPage)
   }
   menupage() {
-    this.navCtrl.push(MenuPage);
+    this.navCtrl.push(MenuPage, { data: this.id });
   }
   homepage() {
     this.navCtrl.push(HomePage);

@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { EmployeeProvider } from './../../providers/employee/employee';
-import Parse from 'parse';
 import { LoginPage } from '../login/login';
-import { SignupPage } from '../signup/signup';
 
 @IonicPage()
 @Component({
@@ -13,7 +11,7 @@ import { SignupPage } from '../signup/signup';
 export class HomePage {
 
   private employees;
- 
+
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,

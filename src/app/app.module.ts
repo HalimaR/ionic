@@ -9,6 +9,7 @@ import { EmployeeProvider } from '../providers/employee/employee';
 import { AccountdbPage } from '../pages/accountdb/accountdb';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
+import { InstellingenPage } from '../pages/instellingen/instellingen';
 
 import { Camera } from '@ionic-native/camera';
 import { ImageProvider } from '../providers/image/image';
@@ -28,7 +29,8 @@ export class CameraMock extends Camera {
     MyApp,
     AccountdbPage,
     LoginPage,
-    MenuPage
+    MenuPage,
+    InstellingenPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ export class CameraMock extends Camera {
   entryComponents: [
     AccountdbPage,
     LoginPage,
-    MenuPage
+    MenuPage,
+    InstellingenPage
   ],
   providers: [
     StatusBar,

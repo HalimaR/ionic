@@ -71,7 +71,7 @@ export class LoginPage {
       });
        alert.present();
       this.navCtrl.push(AccountdbPage, { data: this.uname.value });
-      this.navCtrl.push(MenuPage, { data: this.uname.value });
+      
       console.log('Login Successful')
       
     }

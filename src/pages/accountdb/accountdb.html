@@ -1,16 +1,21 @@
 <ion-header>
-  <ion-navbar hideBackButton>
+  <!-- de icon moeten even groot worden als die van menu -->
+  <ion-navbar  hideBackButton>
     <ion-buttons left>
       <button ion-button (click)='menupage()'>
-        <ion-icon name='menu'></ion-icon>
+        <ion-icon  name='contact'></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>
-      
-    </ion-title>
+
+    <ion-buttons center>
+      <button ion-button >
+        <ion-icon  name="flame"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-buttons end>
        <button ion-button (click)='homepage()'>
-        <ion-icon name='log-out'></ion-icon>
+        <ion-icon  name='log-out'></ion-icon>
       </button> 
     </ion-buttons>
   </ion-navbar>
@@ -24,21 +29,23 @@
     <ion-item-sliding #item>
       
         <ion-item-options side="left">
-          <button ion-button (click)="like(persoon)" color="secondary">like</button>
-         
+          <button ion-button (click)="like(persoon)"  color="secondary">like</button>
+          
         </ion-item-options>
         
         <ion-item-options side="right">
           <button ion-button (click)="hide(persoon)" color="danger">Dislike</button>
         </ion-item-options>
-         
+
+    
     <ion-item class="center"  (click)='showDetails(persoon)' (swipe)="swipe($event)">
-      <img height="100" width="100" src="http://127.0.0.1:5984/employees/{{persoon.doc.firstName}} {{persoon.doc.lastName}}/profile.jpg">
+      <img height="400" width="400" src="http://127.0.0.1:5984/employees/{{persoon.doc.firstName}} {{persoon.doc.lastName}}/profile.jpg">
       
       <div>
         <h3>{{persoon.doc.firstName}} {{persoon.doc.lastName}}</h3>
       </div>
     </ion-item>
+   
     </ion-item-sliding>
   </ion-list>
 </ion-content>
