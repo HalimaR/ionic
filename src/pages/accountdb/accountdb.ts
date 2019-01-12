@@ -14,7 +14,10 @@ import { MenuPage } from '../menu/menu';
 export class  AccountdbPage {
   private employees;
   public id: string;
+  public sex: string
   private likeLijst: Array<string> = [];
+  private vrouwenLijst: Array<string> = [];
+  private mannenLijst: Array<string> = [];
 
   constructor(
     public navCtrl: NavController,
@@ -25,16 +28,36 @@ export class  AccountdbPage {
   ) 
   { 
     this.id = this.navParams.get('data');
+    
   }
 
   ionViewDidEnter() {
     this.empProv.read()
       .then(data => {
-        this.employees = data.rows;
+//Probleem 1) omdat data uit 6 objecten bestaat word er 6x push gedaan
+        for (let i = 0; i < data.rows.length; i++) {
+          if ("vrouw" == data.rows[i].doc.sex) {
+            this.vrouwenLijst.push(data.rows[i]);
+          }
+          else if ("man" == data.rows[i].doc.sex) {
+            this.mannenLijst.push(data.rows[i]);
+          }
+        }
+        if (this.sex == "man") {
+          this.employees = this.mannenLijst
+          console.log("if man");
+        }
+        else if (this.sex == "vrouw"){
+          this.employees = this.vrouwenLijst
+          console.log(this.vrouwenLijst);
+        }
+        else {
+          this.employees = data.rows;
+          console.log("else"+this.sex);
+        }
       });
-      
   }
-    
+  
   showDetails(employee) {
     let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
     modal.onDidDismiss(data => {
@@ -77,8 +100,19 @@ export class  AccountdbPage {
   login(){
     this.navCtrl.push(LoginPage)
   }
+//Probleem 2) er kan geen data gestuurd worden en data terug krijgen in één methode
   menupage() {
-    this.navCtrl.push(MenuPage, { data: this.id });
+    //data word door gestuurd naar de menu pagina
+    //this.navCtrl.push(MenuPage, { data: this.id });
+
+    //data van de menu pagina terug krijgen
+    let modal = this.modalCtrl.create(MenuPage);
+    modal.onDidDismiss((geslacht) => {
+      this.sex = geslacht;
+      console.log(this.sex);
+      console.log(this.ionViewDidEnter());
+    })
+    modal.present();
   }
   homepage() {
     this.navCtrl.push(HomePage);

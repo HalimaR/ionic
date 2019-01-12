@@ -1,28 +1,22 @@
 <ion-header>
   <!-- de icon moeten even groot worden als die van menu -->
   <ion-navbar  hideBackButton>
-    <ion-buttons left>
-      <button ion-button (click)='menupage()'>
-        <ion-icon  name='contact'></ion-icon>
+    <ion-buttons  left>
+      <button ion-button class="icoon" (click)='menupage()'>
+        <ion-icon name='contact'></ion-icon>
       </button>
     </ion-buttons>
-
-    <ion-buttons center>
-      <button ion-button >
-        <ion-icon  name="flame"></ion-icon>
-      </button>
-    </ion-buttons>
-
+    <h1> {{id}} </h1>
     <ion-buttons end>
-       <button ion-button (click)='homepage()'>
-        <ion-icon  name='log-out'></ion-icon>
+       <button ion-button class="icoon" (click)='homepage()'>
+        <ion-icon name='log-out'></ion-icon>
       </button> 
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h1>welkom {{id}} </h1>
+  
   <div class="top">
   </div>
   <ion-list *ngFor='let persoon of employees'>

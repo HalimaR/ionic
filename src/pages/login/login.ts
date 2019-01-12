@@ -41,10 +41,8 @@ export class LoginPage {
     this.empProv.read()
       .then(data => {
         for (let i = 0; i < data.rows.length; i++) {
-          //console.log(data.rows[i].doc.firstName);
           this.voornaamLijst.push(data.rows[i].doc._id);
           this.passwordLijst.push(data.rows[i].doc.password);
-          //this.user_idLijst.push(data.rows[i].doc._id);
         }
       });
   }
