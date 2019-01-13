@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { EmployeeProvider } from './../../providers/employee/employee';
+
+import { ImageProvider } from './../../providers/image/image';
 import { LoginPage } from '../login/login';
 
 @IonicPage()
@@ -11,11 +13,13 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   private employees;
-
+ 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
-    public empProv: EmployeeProvider
+    public empProv: EmployeeProvider,
+    public imgProv: ImageProvider,
+    
   ) {}
 
   ionViewDidEnter() {
@@ -47,4 +51,8 @@ export class HomePage {
   login() {
     this.navCtrl.push(LoginPage)
   }
+  getPictur(emp){
+    
+  }
+ 
 }

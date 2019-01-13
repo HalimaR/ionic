@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController, AlertController, NavParams } from 'ionic-angular';
 import { EmployeeProvider } from '../../providers/employee/employee';
+import { MatchenProvider } from '../../providers/matchen/matchen';
 import { LoginPage} from '../login/login';
 import { HomePage } from '../home/home';
 import { MenuPage } from '../menu/menu';
@@ -14,7 +15,8 @@ import { MenuPage } from '../menu/menu';
 export class  AccountdbPage {
   private employees;
   public id: string;
-  public sex: string
+  public sex: string;
+  
   private likeLijst: Array<string> = [];
   private vrouwenLijst: Array<string> = [];
   private mannenLijst: Array<string> = [];
@@ -24,6 +26,7 @@ export class  AccountdbPage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public empProv: EmployeeProvider,
+    public matchProv: MatchenProvider,
     public navParams: NavParams
   ) 
   { 
@@ -90,13 +93,36 @@ export class  AccountdbPage {
       console.log("swiped to right");
     }
   }
+  match(){
+    let Lijst: Array<string>;
+    Lijst = this.matchProv.matchToevoegen(this.id,this.likeLijst);
+  }
+  matchZoeken(): Array<string> {
+    let gevonden: Array<string>;
+   gevonden = this.matchProv.matchZoeken(this.id);
+   //console.log(gevonden);
+   return gevonden;
+  }
+  matchGevonden(): string{
+    let gevonden: string;
+    gevonden = this.matchProv.matchGevonden(this.matchZoeken(),this.likeLijst);
+    //console.log(gevonden);
+    return gevonden;
+  }
  like(employee){
    this.likeLijst.push(employee.id);
-   console.log(this.likeLijst);
+   //console.log(this.likeLijst);
+   (this.employees).splice(employee,1);
+   console.log(this.matchGevonden());
  }
- hide(){
+ hide(employee){
+   (this.employees).splice(employee, 1);
    console.log("put");
  }
+  remove(no) {
+    (this.employees).splice(no, 1);
+    console.log("remove");
+  }
   login(){
     this.navCtrl.push(LoginPage)
   }

@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { EmployeeProvider } from '../providers/employee/employee';
+import { MatchenProvider } from '../providers/matchen/matchen';
 import { AccountdbPage } from '../pages/accountdb/accountdb';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
@@ -48,9 +49,10 @@ export class CameraMock extends Camera {
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    //Camera,
+    Camera,
     { provide: Camera, useClass: CameraMock },
     EmployeeProvider,
+    MatchenProvider,
     ImageProvider
   ]
 })

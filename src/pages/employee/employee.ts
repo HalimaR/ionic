@@ -66,8 +66,11 @@ export class EmployeePage {
              content_type: 'image/png',
              data: image.toString()
           }
-         }
+         };
+         //this.empProv.update(this.employee).catch(() => {});
          console.log(this.employee);
+         //this.checkAndShowADdUpdateButton();
+         
       })
       .catch((err) => {
          console.log(err);
