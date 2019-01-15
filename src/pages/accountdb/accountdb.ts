@@ -20,6 +20,7 @@ export class  AccountdbPage {
   private likeLijst: Array<string> = [];
   private vrouwenLijst: Array<string> = [];
   private mannenLijst: Array<string> = [];
+  private gevonden: Array<string>;
 
   constructor(
     public navCtrl: NavController,
@@ -86,42 +87,47 @@ export class  AccountdbPage {
   }
   swipe(event) {
     if (event.direction === 2) {
-      console.log("swiped to left");
+      //console.log("swiped to left");
     }
     if (event.direction === 4) {
       
-      console.log("swiped to right");
+      //console.log("swiped to right");
     }
   }
   match(){
     let Lijst: Array<string>;
     Lijst = this.matchProv.matchToevoegen(this.id,this.likeLijst);
   }
+  ///deze methode moet maar 1x gebrueren
   matchZoeken(): Array<string> {
-    let gevonden: Array<string>;
-   gevonden = this.matchProv.matchZoeken(this.id);
-   //console.log(gevonden);
-   return gevonden;
+   this.gevonden = this.matchProv.matchZoeken(this.id);
+   return this.gevonden;
   }
-  matchGevonden(): string{
+  matchGevonden(){
     let gevonden: string;
     gevonden = this.matchProv.matchGevonden(this.matchZoeken(),this.likeLijst);
-    //console.log(gevonden);
-    return gevonden;
+    if (gevonden != undefined ){
+        let alert = this.alertCtrl.create({
+              title: 'je hebt een match',
+              subTitle: ''+gevonden,
+              buttons: ['OK']
+            });
+        alert.present();
+    }
+    //return gevonden;
   }
  like(employee){
    this.likeLijst.push(employee.id);
-   //console.log(this.likeLijst);
    (this.employees).splice(employee,1);
    console.log(this.matchGevonden());
  }
  hide(employee){
    (this.employees).splice(employee, 1);
-   console.log("put");
+   //console.log("put");
  }
   remove(no) {
     (this.employees).splice(no, 1);
-    console.log("remove");
+    //console.log("remove");
   }
   login(){
     this.navCtrl.push(LoginPage)

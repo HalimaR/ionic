@@ -24,6 +24,7 @@ export class MatchenProvider {
         return likeLijst;
    }
 // er word nageken in welke arry de ingelogde gebruiker voor komt
+/// deze methode moet maar 1x uitgevoerd worden
     matchZoeken(id): Array<string>{
 
        var gevonden: string;
@@ -33,7 +34,7 @@ export class MatchenProvider {
            var data = JSON.parse(localStorage.getItem(localStorage.key(a)));
            for (let i = 0; i < data.length; i++) {
                if (id == data[i]) {
-                   gevonden = "match gevonden";
+                  
                    this.matchLijst.push(localStorage.key(a));
                }
            }
@@ -42,18 +43,17 @@ export class MatchenProvider {
     return this.matchLijst;
    }
 //in de like arry van ingelogde gebruiker nakijken of er een match is
-//de waarde van y en x zijn cijfers ipv een string
    matchGevonden(lijst,likeLijst): string{
-       var gevonden: string;
+       var gevonden: string = "je hebt een match met ";
         for(var y = 0; y<lijst.length; y++){
-            for(let x =0; x<likeLijst.length; x++){
-                if(y == x){
-                  gevonden = "je hebt een match met"+ x;
-                  console.log("Y is: "+y);
-                    console.log("X is: " + x);
+            for(var x =0; x<likeLijst.length; x++){
+                if(lijst[y] == likeLijst[x]){
+                    gevonden = gevonden + " " + lijst[y];
+                    return gevonden;
+                    //console.log(lijst[y]);
                 }
             }
+        
         }
-        return gevonden;
    }
 }
