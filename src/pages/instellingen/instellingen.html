@@ -16,11 +16,11 @@
     <ion-label>Mijn voorkeur</ion-label>
     <ion-item>
       <ion-label>Man</ion-label>
-      <ion-radio name="man" value="man" checked></ion-radio>
+      <ion-radio name="man"(click)="man()" value="man"></ion-radio>
     </ion-item>
     <ion-item>
       <ion-label>Vrouw</ion-label>
-      <ion-radio name="vrouw" value="vrouw"></ion-radio>
+      <ion-radio name="vrouw" (click)="vrouw()" value="vrouw"></ion-radio>
     </ion-item>
   </ion-list>
 </ion-content>

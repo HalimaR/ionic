@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
+import { MaxLengthValidator, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -8,6 +9,7 @@ import { IonicPage, NavController, NavParams, ModalController, ViewController } 
 })
 export class InstellingenPage {
   
+
   public sex: string;
   
   constructor(
@@ -21,8 +23,16 @@ export class InstellingenPage {
     console.log('ionViewDidLoad InstellingenPage');
   }
   //de data word terug gestuurd naar de vorige pagina(menupagian)
-  closeModal(){
+  man(): string{
+   this.sex = "man";
+    return this.sex;
+  }
+  vrouw(): string {
     this.sex = "vrouw";
+    return this.sex;
+  }
+  closeModal(){
+    
     let data = this.sex;
      this.viewCtrl.dismiss(data);
      console.log("close")

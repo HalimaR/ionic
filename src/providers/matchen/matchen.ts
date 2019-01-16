@@ -12,7 +12,7 @@ export class MatchenProvider {
     private matchLijst: Array<string> = [];
 
     constructor() { }
-//de likes worden in opgeslagen
+//de likes worden in de localstorage opgeslagen
     matchToevoegen(id, likeLijst): Array<string> {
         
         localStorage.setItem(id, JSON.stringify(likeLijst));
@@ -24,6 +24,7 @@ export class MatchenProvider {
         return likeLijst;
    }
 // er word nageken in welke arry de ingelogde gebruiker voor komt
+//en die word in een arry gestoken   id = ingelogde user
 /// deze methode moet maar 1x uitgevoerd worden
     matchZoeken(id): Array<string>{
 
@@ -36,24 +37,25 @@ export class MatchenProvider {
                if (id == data[i]) {
                   
                    this.matchLijst.push(localStorage.key(a));
+                  
                }
            }
        }
+        return this.matchLijst;
        //console.log(this.matchLijst);
-    return this.matchLijst;
    }
 //in de like arry van ingelogde gebruiker nakijken of er een match is
-   matchGevonden(lijst,likeLijst): string{
+//lijst = komt van matchZoeken
+   matchGevonden(user_id,likeLijst): string{
        var gevonden: string = "je hebt een match met ";
-        for(var y = 0; y<lijst.length; y++){
+            
             for(var x =0; x<likeLijst.length; x++){
-                if(lijst[y] == likeLijst[x]){
-                    gevonden = gevonden + " " + lijst[y];
+                if(user_id == likeLijst[x]){
+                    gevonden = gevonden + " " + user_id;
                     return gevonden;
                     //console.log(lijst[y]);
                 }
             }
         
-        }
    }
 }

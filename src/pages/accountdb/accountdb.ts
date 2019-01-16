@@ -39,14 +39,7 @@ export class  AccountdbPage {
     this.empProv.read()
       .then(data => {
 //Probleem 1) omdat data uit 6 objecten bestaat word er 6x push gedaan
-        for (let i = 0; i < data.rows.length; i++) {
-          if ("vrouw" == data.rows[i].doc.sex) {
-            this.vrouwenLijst.push(data.rows[i]);
-          }
-          else if ("man" == data.rows[i].doc.sex) {
-            this.mannenLijst.push(data.rows[i]);
-          }
-        }
+        
         if (this.sex == "man") {
           this.employees = this.mannenLijst
           console.log("if man");
@@ -61,7 +54,32 @@ export class  AccountdbPage {
         }
       });
   }
-  
+  loopDoorData(){
+    this.empProv.read()
+    .then(data => {
+      this.vrouwenLijst.length = 0;
+      this.mannenLijst.length = 0;
+      for (let i = 0; i < data.rows.length; i++) {
+        if ("vrouw" == data.rows[i].doc.sex) {
+          this.vrouwenLijst.push(data.rows[i]);
+        }
+        else if ("man" == data.rows[i].doc.sex) {
+          this.mannenLijst.push(data.rows[i]);
+        }
+      }
+    });
+  }
+  menupage() {
+    //data van de menu pagina terug krijgen
+    let modal = this.modalCtrl.create(MenuPage, { data: this.id });
+    modal.onDidDismiss((geslacht) => {
+      this.sex = geslacht;
+      console.log(this.sex);
+      this.loopDoorData();
+      console.log(this.ionViewDidEnter());
+    })
+    modal.present();
+  }
   showDetails(employee) {
     let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
     modal.onDidDismiss(data => {
@@ -103,49 +121,31 @@ export class  AccountdbPage {
    this.gevonden = this.matchProv.matchZoeken(this.id);
    return this.gevonden;
   }
-  matchGevonden(){
-    let gevonden: string;
-    gevonden = this.matchProv.matchGevonden(this.matchZoeken(),this.likeLijst);
-    if (gevonden != undefined ){
-        let alert = this.alertCtrl.create({
-              title: 'je hebt een match',
-              subTitle: ''+gevonden,
-              buttons: ['OK']
-            });
-        alert.present();
-    }
-    //return gevonden;
-  }
+  
  like(employee){
    this.likeLijst.push(employee.id);
    (this.employees).splice(employee,1);
-   console.log(this.matchGevonden());
+   
+     let gevonden: string;
+     gevonden = this.matchProv.matchGevonden(employee.id, this.matchZoeken());
+   if (gevonden != undefined) {
+     let alert = this.alertCtrl.create({
+       title: 'je hebt een match',
+       subTitle: '' + gevonden,
+       buttons: ['OK']
+     });
+     alert.present();
+   }
  }
  hide(employee){
    (this.employees).splice(employee, 1);
    //console.log("put");
  }
-  remove(no) {
-    (this.employees).splice(no, 1);
-    //console.log("remove");
-  }
+
   login(){
     this.navCtrl.push(LoginPage)
   }
-//Probleem 2) er kan geen data gestuurd worden en data terug krijgen in één methode
-  menupage() {
-    //data word door gestuurd naar de menu pagina
-    //this.navCtrl.push(MenuPage, { data: this.id });
 
-    //data van de menu pagina terug krijgen
-    let modal = this.modalCtrl.create(MenuPage);
-    modal.onDidDismiss((geslacht) => {
-      this.sex = geslacht;
-      console.log(this.sex);
-      console.log(this.ionViewDidEnter());
-    })
-    modal.present();
-  }
   homepage() {
     this.navCtrl.push(HomePage);
     let alert = this.alertCtrl.create({
@@ -155,4 +155,11 @@ export class  AccountdbPage {
     });
     alert.present();
   }
+  /*
+  getPic(emp){
+    if(emp){
+      return this.empProv.getPic(emp);
+    }
+  }
+  */
 }

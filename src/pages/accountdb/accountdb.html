@@ -6,7 +6,7 @@
         <ion-icon name='contact'></ion-icon>
       </button>
     </ion-buttons>
-    <h1> {{id}} </h1>
+    <h1 class="center"> {{id}} </h1>
     <ion-buttons end>
        <button ion-button class="icoon" (click)='homepage()'>
         <ion-icon name='log-out'></ion-icon>
@@ -35,12 +35,12 @@
     <ion-item class="center"(swipe)="swipe($event)">
       <div>
       </div>
-      <img height="400" width="400" src="http://127.0.0.1:5984/employees/{{persoon.doc.firstName}} {{persoon.doc.lastName}}/profile.jpg">
-      
+      <img height="430" width="400" src="http://127.0.0.1:5984/employees/{{persoon.doc.firstName}} {{persoon.doc.lastName}}/profile.jpg">
+      <!--<img height="400" width="400" src="{{getPic(emp)}}">-->
       <div>
-        <h3>{{persoon.doc.firstName}} {{persoon.doc.lastName}}</h3>
+        <h2>{{persoon.doc.firstName}} {{persoon.doc.lastName}}</h2>
       </div>
-    </ion-item>
+    </ion-item> mockcamera
    
     </ion-item-sliding>
   </ion-list>
