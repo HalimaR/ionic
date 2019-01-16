@@ -5,6 +5,7 @@ import { MatchenProvider } from '../../providers/matchen/matchen';
 import { LoginPage} from '../login/login';
 import { HomePage } from '../home/home';
 import { MenuPage } from '../menu/menu';
+import { Camera, CameraOptions } from "@ionic-native/camera";
 
 
 @IonicPage()
@@ -13,10 +14,11 @@ import { MenuPage } from '../menu/menu';
   templateUrl: 'accountdb.html',
 })
 export class  AccountdbPage {
-  private employees;
+  private employee;
   public id: string;
   public sex: string;
   
+  overviewpage = AccountdbPage;
   private likeLijst: Array<string> = [];
   private vrouwenLijst: Array<string> = [];
   private mannenLijst: Array<string> = [];
@@ -26,9 +28,10 @@ export class  AccountdbPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
-    public empProv: EmployeeProvider,
+    public  empProv: EmployeeProvider,
     public matchProv: MatchenProvider,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private camera: Camera
   ) 
   { 
     this.id = this.navParams.get('data');
@@ -38,18 +41,17 @@ export class  AccountdbPage {
   ionViewDidEnter() {
     this.empProv.read()
       .then(data => {
-//Probleem 1) omdat data uit 6 objecten bestaat word er 6x push gedaan
         
         if (this.sex == "man") {
-          this.employees = this.mannenLijst
+          this.employee = this.mannenLijst
           console.log("if man");
         }
         else if (this.sex == "vrouw"){
-          this.employees = this.vrouwenLijst
+          this.employee = this.vrouwenLijst
           console.log(this.vrouwenLijst);
         }
         else {
-          this.employees = data.rows;
+          this.employee = data.rows;
           console.log("else"+this.sex);
         }
       });
@@ -100,7 +102,7 @@ export class  AccountdbPage {
     this.empProv.read()
       .then(data => {
         //this.employees = data.rows;
-        console.log(this.employees = data.rows);
+        console.log(this.employee = data.rows);
       });
   }
   swipe(event) {
@@ -124,7 +126,7 @@ export class  AccountdbPage {
   
  like(employee){
    this.likeLijst.push(employee.id);
-   (this.employees).splice(employee,1);
+   (this.employee).splice(employee,1);
    
      let gevonden: string;
      gevonden = this.matchProv.matchGevonden(employee.id, this.matchZoeken());
@@ -138,7 +140,7 @@ export class  AccountdbPage {
    }
  }
  hide(employee){
-   (this.employees).splice(employee, 1);
+   (this.employee).splice(employee, 1);
    //console.log("put");
  }
 
@@ -155,11 +157,7 @@ export class  AccountdbPage {
     });
     alert.present();
   }
-  /*
-  getPic(emp){
-    if(emp){
-      return this.empProv.getPic(emp);
-    }
-  }
-  */
+  
+  
+  
 }

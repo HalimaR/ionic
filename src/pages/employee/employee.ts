@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { EmployeeProvider } from './../../providers/employee/employee';
-import { ImageProvider } from './../../providers/image/image';
+import { EmployeeProvider } from '../../providers/employee/employee';
+import { ImageProvider } from '../../providers/image/image';
 import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
 
@@ -21,6 +21,13 @@ export class EmployeePage {
   private canUpdate = false;
   private canAdd = true;
 
+  public myPhoto: any;
+  public imgData: any;
+  public type: any;
+  public user: any;
+  public id: string;
+
+  overviewpage = EmployeePage;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,23 +66,37 @@ export class EmployeePage {
     this.viewCtrl.dismiss(this.employee);
   }
 
-  takePhotograph() {
+  takePhotograph(myPhoto) {
     this.imgProv.takePhotograph()
-      .then((image) => {
-         this.employee._attachments = { 'Profile.png': {
-             content_type: 'image/png',
-             data: image.toString()
+      .then((myPhoto) => {
+         this.employee._attachments = { 'image.png': {
+             content_type: 'image.png',
+             data: myPhoto.toString()
           }
          };
-         //this.empProv.update(this.employee).catch(() => {});
          console.log(this.employee);
-         //this.checkAndShowADdUpdateButton();
-         
       })
       .catch((err) => {
          console.log(err);
       });
    }
+  OpenCamera() {
+
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      
+      console.log(imageData);
+      this.myPhoto = 'data:image/jpeg;base64,' + imageData;
+      this.takePhotograph(this.myPhoto);
+    }, (err) => {
+    });
+  }
   login() {
     this.navCtrl.push(LoginPage)
   }

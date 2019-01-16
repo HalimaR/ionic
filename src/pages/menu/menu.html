@@ -16,17 +16,15 @@
 </ion-header>
 
 <ion-content padding>
-<ion-item class="center">
-  <img height="100" width="100" src="http://127.0.0.1:5984/employees/{{id}}/profile.jpg">
+<ion-item class="center" (click)='showDetails(persoon)'>
+  <img height="100" width="100" src="http://127.0.0.1:5984/employees/{{id}}/image.png">
   <div>
     <h3>{{id}}</h3>
   </div>
 </ion-item>
 <!-- de instelling methode werkt nog niet-->
-<button ion-button color="light" (click)='instellingen()'>INSTELLINGEN</button>
+<button ion-button class="center" round style="width:50%" color="secondary" (click)='instellingen()'>INSTELLINGEN</button>
 
-<ion-list *ngFor='let persoon of employees'>
-<button ion-button color="light" (click)='showDetails(persoon)'>INFO BEWERKEN</button>
-</ion-list>
+
 </ion-content>
 

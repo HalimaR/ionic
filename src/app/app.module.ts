@@ -50,7 +50,7 @@ export class CameraMock extends Camera {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Camera,
-    { provide: Camera, useClass: CameraMock },
+    //{ provide: Camera, useClass: CameraMock },
     EmployeeProvider,
     MatchenProvider,
     ImageProvider

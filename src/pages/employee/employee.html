@@ -79,11 +79,12 @@
   </ion-buttons>
 
   <div class="center">
-    <button ion-button round style="width:50%" icon-left (click)='takePhotograph()'>
+    <button ion-button round style="width:60%" icon-left (click)='OpenCamera()'>
       <ion-icon name="camera"></ion-icon>
         Take Photograph
     </button>
     <br/>
     <!-- <p class="bottom"> <a tappable color="primary" (click)="login()">Log in</a></p> -->
   </div>
+  <p><img src="{{ myPhoto }}"></p>
 </ion-content>
