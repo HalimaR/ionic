@@ -12,10 +12,9 @@ export class EmployeeProvider {
 
   data: any;
   db: any;
-  public cdb: any;
 
   //private remote = 'http://srv-app-087.alpaca.int:5984/employees/';
-  public remote = 'http://192.168.1.16:5984/employees/';
+  private remote = 'http://192.168.1.16:5984/employees/';
 
   constructor(public http: HttpClient) {  }
 
@@ -27,17 +26,7 @@ export class EmployeeProvider {
 
      return { headers: httpHeaders };
   } 
-  /*
- createcouchdb(){
-   this.cdb = new couchdb('employees');
-   let options = {
-     live: true,
-     retry: true,
-     continuous: true
-   };
-  this.cdb.sync(this.remote,options);
- }
- */
+
   createEm(employee): void {
     console.log("data word afgedrukt");
     let url: string = this.remote + employee.firstName + ' ' + employee.lastName;
@@ -61,12 +50,9 @@ export class EmployeeProvider {
       });
    });
   }
-  updatecdb(employee){
-    return this.cdb.put(employee);
-  }
+ 
   update(employee): void {
      let url: string = this.remote + employee.firstName + ' ' + employee.lastName;
-      //return new Promise((resolve, reject) => {
      this.http.get(url, this.getOptions())
        .subscribe(data => {
           this.http.put(url + '?rev=' + data['_rev'], JSON.stringify(employee), this.getOptions())
@@ -78,7 +64,6 @@ export class EmployeeProvider {
        }, err => {
            console.log(err);
        });
-      
   }
 
   delete(employee): void {

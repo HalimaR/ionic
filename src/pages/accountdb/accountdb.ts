@@ -5,7 +5,6 @@ import { MatchenProvider } from '../../providers/matchen/matchen';
 import { LoginPage} from '../login/login';
 import { HomePage } from '../home/home';
 import { MenuPage } from '../menu/menu';
-import { Camera, CameraOptions } from "@ionic-native/camera";
 
 
 @IonicPage()
@@ -14,11 +13,10 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
   templateUrl: 'accountdb.html',
 })
 export class  AccountdbPage {
-  private employee;
+  private employees;
   public id: string;
   public sex: string;
   
-  overviewpage = AccountdbPage;
   private likeLijst: Array<string> = [];
   private vrouwenLijst: Array<string> = [];
   private mannenLijst: Array<string> = [];
@@ -28,10 +26,9 @@ export class  AccountdbPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
-    public  empProv: EmployeeProvider,
+    public empProv: EmployeeProvider,
     public matchProv: MatchenProvider,
-    public navParams: NavParams,
-    private camera: Camera
+    public navParams: NavParams
   ) 
   { 
     this.id = this.navParams.get('data');
@@ -43,15 +40,15 @@ export class  AccountdbPage {
       .then(data => {
         
         if (this.sex == "man") {
-          this.employee = this.mannenLijst
+          this.employees = this.mannenLijst
           console.log("if man");
         }
         else if (this.sex == "vrouw"){
-          this.employee = this.vrouwenLijst
+          this.employees = this.vrouwenLijst
           console.log(this.vrouwenLijst);
         }
         else {
-          this.employee = data.rows;
+          this.employees = data.rows;
           console.log("else"+this.sex);
         }
       });
@@ -102,7 +99,7 @@ export class  AccountdbPage {
     this.empProv.read()
       .then(data => {
         //this.employees = data.rows;
-        console.log(this.employee = data.rows);
+        console.log(this.employees = data.rows);
       });
   }
   swipe(event) {
@@ -126,7 +123,7 @@ export class  AccountdbPage {
   
  like(employee){
    this.likeLijst.push(employee.id);
-   (this.employee).splice(employee,1);
+   (this.employees).splice(employee,1);
    
      let gevonden: string;
      gevonden = this.matchProv.matchGevonden(employee.id, this.matchZoeken());
@@ -140,7 +137,7 @@ export class  AccountdbPage {
    }
  }
  hide(employee){
-   (this.employee).splice(employee, 1);
+   (this.employees).splice(employee, 1);
    //console.log("put");
  }
 
@@ -157,7 +154,4 @@ export class  AccountdbPage {
     });
     alert.present();
   }
-  
-  
-  
 }

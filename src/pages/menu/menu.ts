@@ -41,7 +41,7 @@ export class MenuPage {
   }
 
   showDetails(employee) {
-    let modal = this.modalCtrl.create('EmployeePage', { employee: employee});
+    let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
     modal.onDidDismiss(data => {
       this.reReadEmployees();
     });
@@ -75,6 +75,4 @@ export class MenuPage {
     })
     modal.present();
   }
-  //de data word terug gestuurd naar de vorige pagina(menupagian)
-  
 }
