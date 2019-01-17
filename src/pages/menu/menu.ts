@@ -41,11 +41,14 @@ export class MenuPage {
   }
 
   showDetails(employee) {
+    
     let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
+
     modal.onDidDismiss(data => {
       this.reReadEmployees();
     });
     modal.present();
+    
   }
 
   reReadEmployees() {

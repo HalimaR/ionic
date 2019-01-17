@@ -20,6 +20,7 @@ export class  AccountdbPage {
   private likeLijst: Array<string> = [];
   private vrouwenLijst: Array<string> = [];
   private mannenLijst: Array<string> = [];
+  private userLijst: Array<string> = [];
   private gevonden: Array<string>;
 
   constructor(
@@ -38,18 +39,23 @@ export class  AccountdbPage {
   ionViewDidEnter() {
     this.empProv.read()
       .then(data => {
-        
+        for (let i = 0; i < data.rows.length; i++) {
+          if (this.id != data.rows[i].doc._id) {
+            this.userLijst.push(data.rows[i]);
+          }
+        }
         if (this.sex == "man") {
-          this.employees = this.mannenLijst
+          this.employees = this.mannenLijst;
           console.log("if man");
         }
         else if (this.sex == "vrouw"){
-          this.employees = this.vrouwenLijst
+          this.employees = this.vrouwenLijst;
           console.log(this.vrouwenLijst);
         }
         else {
-          this.employees = data.rows;
-          console.log("else"+this.sex);
+          this.employees = this.userLijst;          
+          console.log("else");
+          
         }
       });
   }
@@ -59,15 +65,16 @@ export class  AccountdbPage {
       this.vrouwenLijst.length = 0;
       this.mannenLijst.length = 0;
       for (let i = 0; i < data.rows.length; i++) {
-        if ("vrouw" == data.rows[i].doc.sex) {
+        if ("vrouw" == data.rows[i].doc.sex && this.id != data.rows[i].doc._id) {
           this.vrouwenLijst.push(data.rows[i]);
         }
-        else if ("man" == data.rows[i].doc.sex) {
+        else if ("man" == data.rows[i].doc.sex && this.id != data.rows[i].doc._id) {
           this.mannenLijst.push(data.rows[i]);
         }
       }
     });
   }
+
   menupage() {
     //data van de menu pagina terug krijgen
     let modal = this.modalCtrl.create(MenuPage, { data: this.id });

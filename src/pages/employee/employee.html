@@ -38,9 +38,21 @@
     </ion-item>
     
     <ion-item>
-      <ion-label color=primary floating>sex</ion-label>
-      <ion-input class="inPassword" type="sex" [(ngModel)]='employee.sex'></ion-input>
+      <ion-label color=primary>sex</ion-label>
     </ion-item>
+    <ion-list radio-group [(ngModel)]='employee.sex'>
+      
+      <ion-item>
+        <ion-label color=primary >Man</ion-label>
+        <ion-radio  name="man"  value="man"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label color=primary>Vrouw</ion-label>
+        <ion-radio  name="vrouw" value="vrouw"></ion-radio>
+      </ion-item>
+      
+    </ion-list>
+
 
   <ion-item>
     <ion-label color=primary floating>password</ion-label>
@@ -79,7 +91,7 @@
   </ion-buttons>
 
   <div class="center">
-    <button ion-button round style="width:50%" icon-left (click)='OpenCamera()'>
+    <button ion-button round style="width:70%" icon-left (click)='OpenCamera()'>
       <ion-icon name="camera"></ion-icon>
         Take Photograph
     </button>
