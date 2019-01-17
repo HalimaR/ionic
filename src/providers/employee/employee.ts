@@ -14,7 +14,7 @@ export class EmployeeProvider {
   db: any;
 
   //private remote = 'http://srv-app-087.alpaca.int:5984/employees/';
-  private remote = 'http://192.168.1.16:5984/employees/';
+  private remote = 'http://127.0.0.1:5984/employees/';
 
   constructor(public http: HttpClient) {  }
 
