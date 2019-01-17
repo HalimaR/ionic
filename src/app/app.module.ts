@@ -11,6 +11,7 @@ import { AccountdbPage } from '../pages/accountdb/accountdb';
 import { LoginPage } from '../pages/login/login';
 import { MenuPage } from '../pages/menu/menu';
 import { InstellingenPage } from '../pages/instellingen/instellingen';
+import { UpdateuserPage } from '../pages/updateuser/updateuser';
 
 import { Camera } from '@ionic-native/camera';
 import { ImageProvider } from '../providers/image/image';
@@ -31,7 +32,8 @@ export class CameraMock extends Camera {
     AccountdbPage,
     LoginPage,
     MenuPage,
-    InstellingenPage
+    InstellingenPage,
+    //UpdateuserPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ export class CameraMock extends Camera {
     AccountdbPage,
     LoginPage,
     MenuPage,
-    InstellingenPage
+    InstellingenPage,
+    //UpdateuserPage
   ],
   providers: [
     StatusBar,
@@ -53,7 +56,8 @@ export class CameraMock extends Camera {
     //{ provide: Camera, useClass: CameraMock },
     EmployeeProvider,
     MatchenProvider,
-    ImageProvider
+    ImageProvider,
+    //UpdateuserPage
   ]
 })
 export class AppModule {}

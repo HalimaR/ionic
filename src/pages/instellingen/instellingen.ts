@@ -2,6 +2,7 @@ import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 import { MaxLengthValidator, FormGroup } from '@angular/forms';
 
+
 @IonicPage()
 @Component({
   selector: 'page-instellingen',

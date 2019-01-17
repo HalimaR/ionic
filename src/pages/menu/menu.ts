@@ -4,6 +4,7 @@ import { EmployeeProvider } from '../../providers/employee/employee';
 import { AccountdbPage } from '../accountdb/accountdb';
 import { HomePage } from '../home/home';
 import { InstellingenPage } from '../instellingen/instellingen';
+import { UpdateuserPage } from '../updateuser/updateuser';
 
 @IonicPage()
 @Component({
@@ -42,7 +43,7 @@ export class MenuPage {
 
   showDetails(employee) {
     
-    let modal = this.modalCtrl.create('EmployeePage', { employee: employee });
+    let modal = this.modalCtrl.create('UpdateuserPage', { employee: employee });
 
     modal.onDidDismiss(data => {
       this.reReadEmployees();
