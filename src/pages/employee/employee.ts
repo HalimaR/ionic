@@ -63,7 +63,8 @@ export class EmployeePage {
   takePhotograph(myPhoto) {
     this.imgProv.takePhotograph()
       .then((myPhoto) => {
-        this.employee._attachments = {'image.png': {
+        this.employee._attachments = {
+          'image.png': {
             content_type: 'image.png',
             data: myPhoto.toString()
           }
