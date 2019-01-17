@@ -1,0 +1,2 @@
+# ionic
+npm install :D
